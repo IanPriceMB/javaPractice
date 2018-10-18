@@ -118,3 +118,36 @@ select o.*, p.*, c.*
 from Orders o
 inner join Producst p on o.ProductID=p.id
 inner join Customer c on o.CustomerID=c.Id;
+
+select o.OrderDate, p.ProductName, p.ProductPrice c.*
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id;
+
+select sum(p.ProductPrice) 
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id;
+
+select sum(p.ProductPrice) as total
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id;
+
+select c.LastName, sum(p.ProductPrice) total
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id
+group by c.LastName;
+
+select c.LastName, p.ProductName, sum(p.ProductPrice) total
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id
+group by c.LastName, p.ProductName;
+
+select c.City, sum(p.ProductPrice), AVG(p.Price) total
+from Orders o
+inner join Producst p on o.ProductID=p.id
+inner join Customer c on o.CustomerID=c.Id
+group by c.City;
