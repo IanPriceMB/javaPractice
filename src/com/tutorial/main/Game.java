@@ -19,14 +19,17 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   private Random r;
 
   public Game(){
-      new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
       
       handler = new Handler();
+      
+      this.addKeyListener(new KeyInput(handler));
+      new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
+
       r = new Random();
       
-      for(int i =0; i < 50; i++) {
-    	  handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
-      }
+	  handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player));
+	  handler.addObject(new Player(WIDTH/2-64, HEIGHT/2-32, ID.Player2));
+	  
   }
 
   public synchronized void start(){
