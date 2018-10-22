@@ -14,8 +14,12 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   private Thread thread;
   private boolean running = false;
 
+  private Handler handler;
+  
   public Game(){
       new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
+      
+      handler = new Handler();
   }
 
   public synchronized void start(){
@@ -62,7 +66,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   }
   
   private void tick(){
-
+	  Handler.tick();
   }
 
   private void render(){
@@ -74,8 +78,10 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
     Graphics g = bs.getDrawGraphics();
     
-    g.setColor(Color.black);
+    g.setColor(Color.green);
     g.fillRect(0,  0,  WIDTH,  HEIGHT);
+    
+    handler.render(g);
 
     g.dispose();
     bs.show();
