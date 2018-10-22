@@ -17,6 +17,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   
   private Handler handler;
   private Random r;
+  private HUD hud;
 
   public Game(){
       
@@ -24,11 +25,14 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
       
       this.addKeyListener(new KeyInput(handler));
       new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
+      
+      hud = new HUD();
 
       r = new Random();
       
 	  handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player));
-	  handler.addObject(new Player(WIDTH/2-64, HEIGHT/2-32, ID.Player2));
+	//  handler.addObject(new Player(WIDTH/2-64, HEIGHT/2-32, ID.Player2));
+	  handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy));
 	  
   }
 
@@ -48,6 +52,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   }
 
   public void run(){
+	  this.requestFocus();
     long lastTime = System.nanoTime();
     double ammountOfTicks = 60.0;
     double ns = 1000000000 / ammountOfTicks;
@@ -77,6 +82,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   
   private void tick(){
 	  handler.tick();
+	  hud.tick();
   }
 
   private void render(){
@@ -92,9 +98,17 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
     g.fillRect(0,  0,  WIDTH,  HEIGHT);
     
     handler.render(g);
+    
+    hud.render(g);
 
     g.dispose();
     bs.show();
+  }
+  
+  public static int clamp(int var, int min, int max) {
+	  if(var >= max) return var = max;
+	  else if(var <= min) return var = min;
+	  else return var;
   }
 
   public static void main(String args[]){
