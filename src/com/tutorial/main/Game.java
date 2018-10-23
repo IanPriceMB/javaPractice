@@ -18,6 +18,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   private Handler handler;
   private Random r;
   private HUD hud;
+  private Spawn spawner;
 
   public Game(){
       
@@ -27,12 +28,12 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
       new Window(WIDTH, HEIGHT, "Let's Build a Game!", this);
       
       hud = new HUD();
-
+      spawner = new Spawn(handler, hud);
       r = new Random();
       
 	  handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player, handler));
 	//  handler.addObject(new Player(WIDTH/2-64, HEIGHT/2-32, ID.Player2));
-	  handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+	  handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH-50), r.nextInt(Game.HEIGHT-50), ID.BasicEnemy, handler));
 	  
   }
 
@@ -83,6 +84,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   private void tick(){
 	  handler.tick();
 	  hud.tick();
+	  spawner.tick();
   }
 
   private void render(){
