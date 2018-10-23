@@ -7,10 +7,9 @@ import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
+  private static final long serialVersionUID = 147634613591168312L;
 
-	private static final long serialVersionUID = 147634613591168312L;
-
-public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;  
+  public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;  
 
   private Thread thread;
   private boolean running = false;
@@ -107,7 +106,7 @@ public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
     bs.show();
   }
   
-  public static int clamp(int var, int min, int max) {
+  public static float clamp(float var, float min, float max) {
 	  if(var >= max) return var = max;
 	  else if(var <= min) return var = min;
 	  else return var;
